@@ -1,0 +1,149 @@
+Roller Coaster Problem Code: MINHEIGHT
+Add problem to Todo list
+Submit
+Chef's son wants to go on a roller coaster ride. The height of Chef's son is X inches while the minimum height required to go on the ride is H inches. Determine whether he can go on the ride or not.
+
+Input Format
+The first line contains a single integer T - the number of test cases. Then the test cases follow.
+The first and only line of each test case contains two integers X and H - the height of Chef's son and the minimum height required for the ride respectively.
+Output Format
+For each test case, output in a single line, YES if Chef's son can go on the ride. Otherwise, output NO.
+
+You may print each character of YES and NO in uppercase or lowercase (for example, yes, yEs, Yes will be considered identical)
+
+Constraints
+1≤T≤1000
+1≤X,H≤100
+Sample Input 1 
+4
+15 20
+50 48
+32 32
+38 39
+Sample Output 1 
+NO
+YES
+YES
+NO
+Explanation
+Test case 1: Chef's son can not go on the ride as his height < the minimum required height.
+
+Test case 2: Chef's son can go on the ride as his height ≥ the minimum required height.
+
+Test case 3: Chef's son can go on the ride as his height ≥ the minimum required height.
+
+Test case 4: Chef's son can not go on the ride as his height < the minimum required height.
+
+*************************************************************************************************************************************************************************
+# PYTHON solutions:
+1)
+
+for _ in range(int(input())):
+    x,h = map(int,input().split())
+    print("YES" if x>=h else "NO")
+
+*************************************************************************************************************************************************************************
+# GOLANG solutions:
+1) # using bufio.NewScanner
+
+package main
+import (
+    "fmt"
+    "bufio"
+    "os"
+    "strconv"
+    "strings"
+)
+
+func main() {
+    scanner := bufio.NewScanner(os.Stdin)                // create a scanner which will read from input stream (stdin)
+    scanner.Scan()                                       // scan an entire line (by default scans till newline character is not ecountered)
+    t, err := strconv.ParseInt(scanner.Text(),10,64)     // base is 10 meaning int(decimal), size is int64
+    if err != nil {
+        fmt.Print(err)
+        return
+    }
+    for i:=int64(0);i<t;i++ {
+        scanner.Scan()
+        var input_string string = scanner.Text()        // store the scanned string text above in a variable 
+        
+        output_array := strings.Fields(input_string)    // converts string into slice, seperated by spaces by default
+      //above line can also be written as
+      //output_array := strings.Split(scanner.Text(), " ")        // read more about Fields and Splits
+
+        x, _ := strconv.ParseInt(output_array[0],10,64)
+        h, _ := strconv.ParseInt(output_array[1],10,64)
+        
+        if x>=h {
+            fmt.Println("YES")
+        }else {
+            fmt.Println("NO")
+        }
+    }
+}
+
+------------------------------------
+
+2) # using bufio.NewReader
+
+package main
+import (
+    "bufio"
+    "os"
+    "strconv"
+    "strings"
+    "fmt"
+)
+
+func main() {
+    reader := bufio.NewReader(os.Stdin)
+    input_t, _ := reader.ReadString('\n')              //will read the string till newline character is not encountered
+                                                       // note: here the input_string also store the delimiter character(newline character in this case)
+    input_t_trimmed := strings.TrimSpace(input_t)      //TrimSpace returns a slice of the string s, with all leading and trailing white space and special characters removed
+    t, _ := strconv.ParseInt(input_t_trimmed, 10, 64)
+    
+    for i:=int64(0);i<t;i++ {
+        input_string, _ := reader.ReadString('\n')
+        input_string_trimmed := strings.TrimSpace(input_string)
+        output_array := strings.Fields(input_string_trimmed)
+        x, _ := strconv.ParseInt(output_array[0],10,64)
+        h, _ := strconv.ParseInt(output_array[1],10,64)
+        
+        if x>=h {
+            fmt.Println("YES")
+        }else {
+            fmt.Println("NO")
+        }
+    }
+}
+
+-----------------------------------
+
+3) # using bufio.NewReader with Fscan
+
+package main
+import (
+    "bufio"
+    "os"
+    "fmt"
+)
+
+func main() {
+    var t int
+    
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Fscan(reader, &t)
+    for i:=0;i<t;i++ {
+        var x,h int
+        fmt.Fscan(reader, &x,&h)
+        
+        if x>=h {
+            fmt.Println("YES")
+        }else {
+            fmt.Println("NO")
+        }
+    }
+}
+
+
+
