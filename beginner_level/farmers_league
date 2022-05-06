@@ -139,3 +139,29 @@ func main() {
         
     }
 }
+
+
+5)
+
+package main
+import "fmt"
+
+func main(){
+	var countTest int
+    fmt.Scanln(&countTest)
+
+    var commands int
+    sliceCommands := make([]int, 0, countTest)
+    for i := 0; i < countTest; i++ {
+        fmt.Scanln(&commands)
+        sliceCommands = append(sliceCommands, commands)
+    }
+
+    for i := 0; i < countTest; i++ {
+        winner := (sliceCommands[i] - 1) * 3
+        secondPlace := ((sliceCommands[i] - 1) / 2) * 3
+
+        fmt.Println(winner - secondPlace)
+    }
+}
+
